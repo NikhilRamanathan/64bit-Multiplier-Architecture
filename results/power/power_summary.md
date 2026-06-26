@@ -1,17 +1,21 @@
-# OpenROAD Power Summary
+# Power Summary
 
-Power values are taken from the raw power reports in `results/power/`.
+Power was regenerated using OpenROAD from the final SKY130-mapped Verilog netlists stored under `results/netlists/`.
 
-| Architecture | Internal Power (W) | Switching Power (W) | Leakage Power (W) | Total Power (mW) |
+The power estimates use a uniform global activity assumption:
+
+- Activity factor: 0.10
+- Duty cycle: 0.50
+- Clock period: 10 ns
+- Input transition: 0.10 ns
+- Output load: 0.05 pF
+
+These values should be interpreted as post-synthesis power estimates, not post-layout signoff power, because placed-and-routed DEF parasitics were not used.
+
+| Architecture | Internal Power (mW) | Switching Power (mW) | Leakage Power (mW) | Total Power (mW) |
 |---|---:|---:|---:|---:|
-| Array | 4.21e-02 | 5.88e-02 | 1.25e-07 | 101.0 |
-| Radix-4 Booth | 4.03e-02 | 4.50e-02 | 8.36e-08 | 85.3 |
-| Dadda | 3.15e-02 | 3.21e-02 | 9.76e-08 | 63.6 |
+| Array | 2.30 | 1.74 | 0.0000835 | 4.03 |
+| Radix-4 Booth | 1.66 | 1.68 | 0.0000569 | 3.34 |
+| Dadda | 2.03 | 1.46 | 0.0000758 | 3.49 |
 
-## Raw Evidence
-
-| Architecture | Raw Power Report |
-|---|---|
-| Array | results/power/array_power_report.txt |
-| Radix-4 Booth | results/power/booth_power_report.txt |
-| Dadda | results/power/dadda_power_report.txt |
+Under the same activity assumptions, the Radix-4 Booth multiplier has the lowest estimated total power.
